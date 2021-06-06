@@ -18,9 +18,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import AddIcon from '@material-ui/icons/Add';
+import { useHistory } from 'react-router-dom';
+
 
 const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
 
   appBar: {
@@ -54,14 +55,14 @@ const useStyles = makeStyles((theme) => ({
   drawerOpen: {
     width: drawerWidth,
     background: 'teal',
-    color:'white',
+    color: 'white',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
   drawerClose: {
-    color:'white',
+    color: 'white',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -73,10 +74,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   Icon: {
-    background:"teal"
+    background: "teal"
   },
   toolbar: {
-    background:"teal",
+    background: "teal",
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
@@ -88,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavDrawer() {
   const classes = useStyles();
+  const history = useHistory();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -121,7 +123,7 @@ export default function NavDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-              Blogger
+            Blogger
           </Typography>
         </Toolbar>
       </AppBar>
@@ -145,17 +147,17 @@ export default function NavDrawer() {
         </div>
         <Divider />
         <List>
-          {['Add Blog' ].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index  === 0 ? <AddIcon />  : <MailIcon />}</ListItemIcon>
+          {['Add Blog'].map((text, index) => (
+            <ListItem onClick={() => history.push('/')} button key={text}>
+              <ListItemIcon  >{index === 0 ? <AddIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
         <Divider />
         <List>
-          {['All blogger' ].map((text, index) => (
-            <ListItem button key={text}>
+          {['All blogger'].map((text, index) => (
+            <ListItem onClick={() => history.push('/listBlogger')} button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
